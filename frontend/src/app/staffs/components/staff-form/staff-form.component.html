@@ -1,0 +1,46 @@
+<div layout="column" layout-align="center center">
+  <mat-card>
+    <h3>Create Staff</h3>
+    {{this.staffForm.value | json}}
+    <form class="form-container" [formGroup]="staffForm" novalidate (ngSubmit)="onSubmit()">
+
+
+      <mat-form-field color="primary">
+        <input matInput placeholder="Name" formControlName="name">
+        <mat-error *ngIf="staffForm.invalid && staffForm.touched">name is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field color="primary">
+        <input matInput [matDatepicker]="dob" placeholder="Choose date of birth" formControlName="dob">
+        <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
+        <mat-datepicker #dob></mat-datepicker>
+        <mat-error *ngIf="staffForm.invalid && staffForm.touched">Date of birth is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field color="primary">
+        <input matInput [matDatepicker]="workingSince" placeholder="Choose a join date" formControlName="workingSince">
+        <mat-datepicker-toggle matSuffix [for]="workingSince"></mat-datepicker-toggle>
+        <mat-datepicker #workingSince></mat-datepicker>
+        <mat-error *ngIf="staffForm.invalid && staffForm.touched">Start date is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field color="primary">
+        <input matInput placeholder="email" type="email" formControlName="email">
+        <mat-error *ngIf="staffForm.invalid && staffForm.touched">Email is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field color="primary">
+        <input matInput placeholder="Access Code" formControlName="accessCode">
+        <mat-error *ngIf="staffForm.invalid && staffForm.touched">AccessCode is required</mat-error>
+      </mat-form-field>
+
+
+      <div>
+        <button mat-raised-button [disabled]="!staffForm.valid" type="submit" color="accent">Save</button>
+        <button mat-raised-button type="reset" color="primary" style="margin-left: 30px;">Reset</button>
+      </div>
+
+    </form>
+
+  </mat-card>
+</div>
