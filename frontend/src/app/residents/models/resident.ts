@@ -3,7 +3,7 @@ export class Resident {
   _id: string;
   unit: number;
   name: number;
-  dob: Date;
+  // dob: Date;
   livingSinece: Date;
   email: number;
   unitSharedWith: number;

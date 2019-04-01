@@ -14,12 +14,12 @@
         <mat-error *ngIf="residentForm.invalid && residentForm.touched">name is required</mat-error>
       </mat-form-field>
 
-      <mat-form-field color="primary">
+      <!-- <mat-form-field color="primary">
         <input matInput [matDatepicker]="dob" placeholder="Choose a date" formControlName="dob">
         <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
         <mat-datepicker #dob></mat-datepicker>
         <mat-error *ngIf="residentForm.invalid && residentForm.touched">Date of birth is required</mat-error>
-      </mat-form-field>
+      </mat-form-field> -->
 
       <mat-form-field color="primary">
         <input matInput [matDatepicker]="livingSince" placeholder="Choose a start date" formControlName="livingSince">

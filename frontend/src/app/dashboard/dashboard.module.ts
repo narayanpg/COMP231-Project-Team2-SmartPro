@@ -10,6 +10,8 @@ import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { ResidentModule } from '../residents/residents.module';
 import { StaffsModule } from '../staffs/staff.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpInterceptorService } from '../core/services/http-interceptor.service';
 
 
 @NgModule({
@@ -20,6 +22,9 @@ import { StaffsModule } from '../staffs/staff.module';
     ResidentModule,
     StaffsModule,
     MaterialModule,
-  ]
+  ],
+  providers: [{
+    provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true
+  }]
 })
 export class DashboardModule { }

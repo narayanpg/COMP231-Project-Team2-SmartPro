@@ -1,7 +1,7 @@
 import express from 'express';
 import logger from 'morgan';
 import cors from 'cors';
-//import passport from 'passport';
+import passport from 'passport';
 
 export const setGlobalMiddleware = app => {
   app.use(express.json());
@@ -10,8 +10,8 @@ export const setGlobalMiddleware = app => {
   }));
   app.use(cors());
   app.use(logger('dev'));
-  // app.use(passport.initialize({
-  //   userProperty: 'currentUser'
-  // }));
+  app.use(passport.initialize({
+    userProperty: 'currentUser'
+  }));
   //configureJWTStrategy();
 }

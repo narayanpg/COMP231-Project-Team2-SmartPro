@@ -73,7 +73,6 @@ export class ResidentFormComponent implements OnInit {
     this.residentForm = this.fb.group({
       unit: ['', Validators.required],
       name: ['', Validators.required],
-      dob: ['', Validators.required],
       livingSince: ['', Validators.required],
       email: ['', Validators.required],
       unitSharedWith: '',

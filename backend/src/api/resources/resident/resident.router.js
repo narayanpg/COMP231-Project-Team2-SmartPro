@@ -1,5 +1,5 @@
 import express from 'express';
-//import passport from 'passport';
+import passport from 'passport';
 import residentController from './resident.controller';
 
 export const residentRouter = express.Router();
@@ -8,9 +8,19 @@ residentRouter.route('/')
   .post(residentController.create)
   .get(residentController.findAll);
 
-  residentRouter.route('/:id')
+residentRouter.route('/:id')
   .get(residentController.findOne)
   .delete(residentController.delete)
   .put(residentController.update);
 
 
+
+//to authenticate use this method:
+//passport.authenticate('jwt', { session: false }),
+//example
+//without authentication:
+//residentRoute('/:id').get(residentController.findOne)
+
+//with authentication:
+//residentRouter.route('/:id')
+//.get(passport.authenticate('jwt', {session: false}), residentController.findOne)

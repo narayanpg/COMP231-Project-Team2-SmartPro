@@ -13,10 +13,10 @@ const ResidentSchema = new Schema({
     type: String,
     required: true,
   },
-  dob: {
-    type: Date,
-    required: true,
-  },
+  // dob: {
+  //   type: Date,
+  //   required: true,
+  // },
   livingSince: {
     type: Date,
     required: true,

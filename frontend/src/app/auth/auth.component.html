@@ -1,0 +1,71 @@
+<div class="limiter">
+  <div class="container-login">
+    <mat-card>
+      <div *ngIf="isResultsLoading" class="mat-elevation-z8">
+        <div class="loading-shade">
+          <mat-spinner color="accent"></mat-spinner>
+        </div>
+      </div>
+      <mat-card-title class="heading">{{title}}</mat-card-title>
+      <mat-card-content>
+        <form class="form-container" [formGroup]="authForm" novalidate (ngSubmit)="onSubmit()">
+          <!-- {{this.authForm.value|json }} -->
+          <div *ngIf="title === 'Signup'">
+            <mat-form-field color="accent" style="width: 100%"  >
+              <input matInput placeholder="Unit" formControlName="unitNum">
+              <mat-error *ngIf="authForm.invalid && authForm.touched"> unit is required
+              </mat-error>
+            </mat-form-field>
+            <div class="row">
+              <mat-form-field color="accent" style="width: 100%"  >
+                <input matInput placeholder="Name" formControlName="fullName">
+                <mat-error *ngIf="authForm.invalid && authForm.touched"> Name is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <mat-form-field color="accent" style="width: 100%"  >
+              <input matInput placeholder="Email" formControlName="email">
+              <mat-error *ngIf="authForm.invalid && authForm.touched"> email is required
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field color="accent" style="width: 100%"  >
+              <input matInput placeholder="Password" formControlName="password" type="password">
+              <mat-error *ngIf="authForm.invalid && authForm.touched"> password is
+                required</mat-error>
+            </mat-form-field>
+          </div>
+          <div *ngIf="title === 'Login'">
+            <form class="form-container" [formGroup]="authForm2" novalidate (ngSubmit)="onSubmit()">
+              <mat-form-field color="accent" style="width: 100%"  >
+                <input matInput placeholder="Email" formControlName="email">
+                <mat-error *ngIf="authForm2.invalid && authForm2.touched"> email is required
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field color="accent"  style="width: 100%">
+                <input matInput placeholder="Password" formControlName="password" type="password">
+                <mat-error *ngIf="authForm2.invalid && authForm2.touched"> password is
+                  required</mat-error>
+              </mat-form-field>
+            </form>
+          </div>
+
+
+          <div *ngIf="title === 'Signup'">
+            <button mat-raised-button [disabled]="!authForm.valid" type="submit" color="accent">{{title}}</button>
+          </div>
+          <div *ngIf="title === 'Login'">
+            <button mat-raised-button [disabled]="!authForm2.valid" type="submit" color="accent">{{title}}</button>
+          </div>
+        </form>
+      </mat-card-content>
+      <div class="alternative" *ngIf="title === 'Login'">
+        <p>Don't have an account?</p>
+        <button mat-raised-button color="accent" [routerLink]="['/signup']">Signup</button>
+      </div>
+      <div class="alternative" *ngIf="title === 'Signup'">
+        <p>Have an account?</p>
+        <button mat-raised-button color="accent" [routerLink]="['/login']">Login</button>
+      </div>
+    </mat-card>
+  </div>
+</div>

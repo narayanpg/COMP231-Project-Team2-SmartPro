@@ -21,7 +21,7 @@ export class ResidentListingComponent implements OnInit {
   displayedColumns = [
     'unit',
     'name',
-    'dob',
+    // 'dob',
     'livingSince',
     'email',
     'unitSharedWith',

@@ -13,7 +13,7 @@ export default {
     const schema = Joi.object().keys({
       unit: Joi.number().required(),
       name: Joi.string().required(),
-      dob: Joi.date().required(),
+      // dob: Joi.date().required(),
       livingSince: Joi.date().required(),
       email: Joi.string().required(),
       unitSharedWith: Joi.number().optional(),
@@ -70,7 +70,7 @@ export default {
     const schema = Joi.object().keys({
       unit: Joi.number().required(),
       name: Joi.string().required(),
-      dob: Joi.date().required(),
+      // dob: Joi.date().required(),
       livingSince: Joi.date().required(),
       email: Joi.string().required(),
       unitSharedWith: Joi.number().optional(),
