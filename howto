@@ -1,0 +1,71 @@
+How to run backend:
+
+1) npm install
+2) npm start
+
+How to run frontend:
+
+1) npm install
+2) ng serve
+
+Dependencies:
+1) Mongodb database
+2) Node version 11.9
+3) Angular cli: 7.3.5
+4) Angular material version 5.2.5
+
+
+Admin vs other users
+====================
+1) admin user: Narayan Guragain is admin user. Determined by name.
+2) staff user: access code is 100staff. Determined by access code.
+3) resident: access code is 100res. Determined by access code.
+
+Admin can view everything in the system.
+Staff and residents have limited view.
+
+if any user posts a service request, the user can view only his requests.
+But admin can view all service requests.
+
+
+sample users:
+===================
+admin
+==================
+unit: 100
+accesscode: 100staff
+name: Narayan Guragain
+email: admin@smartpro.com
+password: 123456
+===================
+staff
+==================
+unit: 100
+accesscode: 100staff
+name: Harry Sharma
+email: harry@smartpro.com
+password: 123456
+===================
+resident
+==================
+unit: 101
+accesscode: 100res
+name: Brad Pitt
+email: brrad@smartpro.com
+password: 123456
+
+
+==================
+sameple requests:
+=================
+topic: Leakage from ceiling
+message:
+hey boss,
+You know what?
+There is a huge leakage on my ceiling.
+Repair it now or I will sue you all guys.
+I want it done today.
+Thanks
+Unit: (give any number such as 102)
+
+ 
