@@ -4,8 +4,24 @@ import HttpStatus from 'http-status-codes';
 import Request from './request.model';
 
 export default {
+  findAllByUser(req, res) {
+    const {
+      id
+    } = req.params;
+    Request.find({
+        user: id
+      })
+      .sort({
+        date: 'desc'
+      })
+      .then(request => res.json(request))
+      .catch(err => res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(err));
+  },
   findAll(req, res) {
     Request.find()
+      .sort({
+        date: 'desc'
+      })
       .then(request => res.json(request))
       .catch(err => res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(err));
   },
@@ -13,6 +29,8 @@ export default {
     const schema = Joi.object().keys({
       topic: Joi.string().required(),
       message: Joi.string().required(),
+      unit: Joi.string().required(),
+      user: Joi.string().required(),
     });
     const {
       error,
@@ -64,6 +82,7 @@ export default {
     const schema = Joi.object().keys({
       topic: Joi.string().required(),
       message: Joi.string().required(),
+      unit: Joi.string().required(),
     });
     const {
       error,

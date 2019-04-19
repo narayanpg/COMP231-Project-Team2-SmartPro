@@ -3,25 +3,27 @@
   flex-direction: column;
 }
 
-.form-container > * {
+.form-container>* {
   width: 100%;
 }
 
-.heading{
+.heading {
   text-align: center;
 
 }
+
 .mat-card {
   position: absolute;
   width: 400px;
   z-index: 10;
-  top: 30%;
+  top: 20%;
   left: 50%;
   margin: -100px 0 0 -150px;
   // background: red;
 }
+
 .alternative {
-  margin-top: 40px;
+  margin-top: 20px;
   padding-top: 40px;
   text-align: center;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
@@ -30,7 +32,11 @@
 .limiter {
   width: 100%;
   margin: 0 auto;
+  background-image: url(../public/tornto.jpg);
+  background-repeat: no-repeat;
+  background-size: cover; 
 }
+
 .container-login {
   width: 100%;
   min-height: 100vh;
@@ -47,9 +53,10 @@
   // background: yellow;
 }
 
-.mat-card > .mat-card-title {
+.mat-card>.mat-card-title {
   color: #dd548d;
 }
+
 .loading-shade {
   position: absolute;
   top: 0;
@@ -62,3 +69,5 @@
   align-items: center;
   justify-content: center;
 }
+
+

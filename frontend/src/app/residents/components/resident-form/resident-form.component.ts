@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ResidentService } from '../../services/resident.service';
 import { MatSnackBar } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Resident } from '../../models/resident';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { User } from 'src/app/core/models/user';
 
 @Component({
   selector: 'app-resident-form',
@@ -11,24 +11,25 @@ import { Resident } from '../../models/resident';
   styleUrls: ['./resident-form.component.scss']
 })
 export class ResidentFormComponent implements OnInit {
-  private resident: Resident;
+  // private resident: Resident;
+  private user: User;
   residentForm: FormGroup;
   constructor(
     private fb: FormBuilder,
-    private residentService: ResidentService,
+    private authService: AuthService,
     private snackBar: MatSnackBar,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.createForm();
-    this.setInvoiceToForm();
+    this.setUserToForm();
   }
   onSubmit() {
-    if (this.resident) {
-      this.residentService
-        .updateResident(this.resident._id, this.residentForm.value)
+    if (this.user) {
+      this.authService
+        .updateUser(this.user._id, this.residentForm.value)
         .subscribe(
           data => {
             this.snackBar.open('Resident updated', 'Success', {
@@ -39,31 +40,29 @@ export class ResidentFormComponent implements OnInit {
           err => this.errorHandler(err, 'Failed to update resident')
         );
     } else {
-      this.residentService.createResident(this.residentForm.value).subscribe(
-        data => {
+      this.authService.signup(this.residentForm.value)
+        .subscribe(data => {
           this.snackBar.open('Resident created!', 'Success', {
             duration: 2000
           });
           this.residentForm.reset();
+          console.log(data);
           this.router.navigate(['dashboard', 'residents']);
-        },
-        err => this.errorHandler(err, 'Failed to create Resident')
-      );
+        }, err => this.errorHandler(err, 'Opps, something went wrong'));
     }
   }
-  private setInvoiceToForm() {
-    // get the id of the resident
+  private setUserToForm() {
+    // get the id of the user
     this.route.params.subscribe(params => {
-      // let id = params['id'];
       // tslint:disable-next-line: prefer-const
       let id = params.id;
       if (!id) {
         return;
       }
-      this.residentService.getResident(id).subscribe(
-        resident => {
-          this.resident = resident;
-          this.residentForm.patchValue(this.resident);
+      this.authService.getUser(id).subscribe(
+        user => {
+          this.user = user;
+          this.residentForm.patchValue(this.user);
         },
         err => this.errorHandler(err, 'Failed to get Resident')
       );
@@ -71,12 +70,12 @@ export class ResidentFormComponent implements OnInit {
   }
   private createForm() {
     this.residentForm = this.fb.group({
-      unit: ['', Validators.required],
-      name: ['', Validators.required],
-      livingSince: ['', Validators.required],
+      unitNum: ['', Validators.required],
+      accessCode: ['', Validators.required],
+      fullName: ['', Validators.required],
+      dob: ['', Validators.required],
       email: ['', Validators.required],
-      unitSharedWith: '',
-      accessCode: ['', Validators.required]
+      password: ['', Validators.required]
     });
   }
   private errorHandler(error, message) {

@@ -12,6 +12,8 @@ import { ResidentModule } from '../residents/residents.module';
 import { StaffsModule } from '../staffs/staff.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpInterceptorService } from '../core/services/http-interceptor.service';
+import { AccountModule } from '../account/account.module';
+import { RequestsModule } from '../requests/requests.module';
 
 
 @NgModule({
@@ -22,6 +24,8 @@ import { HttpInterceptorService } from '../core/services/http-interceptor.servic
     ResidentModule,
     StaffsModule,
     MaterialModule,
+    AccountModule,
+    RequestsModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true

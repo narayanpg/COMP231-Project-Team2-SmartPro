@@ -1,9 +1,11 @@
 <mat-toolbar>
   <h3>Staff</h3>
   <div class="menu-bar mat-elevation-z8">
-    <button mat-button (click)="saveBtnHandler()">
-      New Staff
-    </button>
+    <span *ngIf="isAdmin()">
+      <button mat-button (click)="saveBtnHandler()">
+        New Staff
+      </button>
+    </span>
   </div>
 </mat-toolbar>
 
@@ -12,7 +14,7 @@
 
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-      <mat-cell *matCellDef="let staff"> {{staff.name}} </mat-cell>
+      <mat-cell *matCellDef="let staff"> {{staff.fullName}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="dob">
@@ -20,17 +22,13 @@
       <mat-cell *matCellDef="let staff"> {{staff.dob | date}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="workingSince">
-      <mat-header-cell *matHeaderCellDef> Join Date</mat-header-cell>
-      <mat-cell *matCellDef="let staff"> {{staff.workingSince | date}} </mat-cell>
-    </ng-container>
     <ng-container matColumnDef="email">
       <mat-header-cell *matHeaderCellDef> Email</mat-header-cell>
       <mat-cell *matCellDef="let staff"> {{staff.email}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="accessCode">
-      <mat-header-cell *matHeaderCellDef> AccessCode</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Access Code </mat-header-cell>
       <mat-cell *matCellDef="let staff"> {{staff.accessCode}} </mat-cell>
     </ng-container>
 

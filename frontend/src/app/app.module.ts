@@ -8,6 +8,7 @@ import { MaterialModule } from './shared/material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
+import { AccountModule } from './account/account.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,7 +18,8 @@ import { CoreModule } from './core/core.module';
     AppRoutingModule,
     MaterialModule,
     AuthModule,
-    CoreModule
+    CoreModule,
+    AccountModule
   ],
   providers: [],
   bootstrap: [AppComponent]

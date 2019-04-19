@@ -12,3 +12,6 @@ requestRouter.route('/:id')
   .get(requestController.findOne)
   .delete(requestController.delete)
   .put(requestController.update);
+
+requestRouter.route('/byuser/:id')
+  .get(requestController.findAllByUser);

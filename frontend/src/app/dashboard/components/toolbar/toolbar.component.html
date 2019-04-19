@@ -4,8 +4,9 @@
       menu
     </mat-icon>
   </button>
-  <span>Invoice Builder</span>
+  <span>SmartPro App</span>
   <div class="menu-bar">
+    <span *ngIf="isLoggedIn()"><span style="font-size: 15px;">Welcome {{getUserName()}}</span></span>
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
     </button>

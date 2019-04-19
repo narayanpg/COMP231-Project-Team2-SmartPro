@@ -18,9 +18,25 @@
             </mat-form-field>
             <div class="row">
               <mat-form-field color="accent" style="width: 100%"  >
+                <input matInput placeholder="Access Code" formControlName="accessCode">
+                <mat-error *ngIf="authForm.invalid && authForm.touched"> Access code is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field color="accent" style="width: 100%"  >
                 <input matInput placeholder="Name" formControlName="fullName">
                 <mat-error *ngIf="authForm.invalid && authForm.touched"> Name is required
                 </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field color="accent" style="width: 100%">
+                <input matInput [matDatepicker]="dob" placeholder="Choose a date" formControlName="dob">
+                <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
+                <mat-datepicker #dob></mat-datepicker>
+                <mat-error *ngIf="authForm.invalid && authForm.touched">
+                  Birth date is required</mat-error>
               </mat-form-field>
             </div>
             <mat-form-field color="accent" style="width: 100%"  >

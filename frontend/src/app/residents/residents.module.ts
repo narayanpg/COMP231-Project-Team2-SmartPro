@@ -4,7 +4,6 @@ import { ResidentListingComponent } from './components/resident-listing/resident
 import { MaterialModule } from '../shared/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { ResidentService } from './services/resident.service';
 import { ResidentFormComponent } from './components/resident-form/resident-form.component';
 
 @NgModule({
@@ -17,6 +16,5 @@ import { ResidentFormComponent } from './components/resident-form/resident-form.
     ReactiveFormsModule
   ],
   exports: [ResidentListingComponent],
-  providers: [ResidentService]
 })
-export class ResidentModule {}
+export class ResidentModule { }

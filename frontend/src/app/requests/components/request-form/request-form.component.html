@@ -1,0 +1,36 @@
+<div layout="column" layout-align="center center">
+  <mat-card>
+    <h3>Create Request</h3>
+    <!-- {{this.residentForm.value | json}} -->
+    <form class="form-container" [formGroup]="requestForm" novalidate (ngSubmit)="onSubmit()">
+
+      <mat-form-field color="primary">
+        <input matInput placeholder="Topic" formControlName="topic">
+        <mat-error *ngIf="requestForm.invalid && requestForm.touched">Topic is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field color="primary">
+        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3"
+          cdkAutosizeMaxRows="9" placeholder="Message" formControlName="message"></textarea>
+        <mat-error *ngIf="requestForm.invalid && requestForm.touched">Message is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field color="primary">
+        <input matInput placeholder="Unit" formControlName="unit">
+        <mat-error *ngIf="requestForm.invalid && requestForm.touched">Unit is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field color="primary">
+        <input matInput placeholder="User" formControlName="user" value="{{getUserId()}}">
+        <mat-error>User is required</mat-error>
+      </mat-form-field>
+
+      <div>
+        <button mat-raised-button [disabled]="!requestForm.valid" type="submit" color="accent">Save</button>
+        <button mat-raised-button type="reset" color="primary" style="margin-left: 30px;">Reset</button>
+      </div>
+
+    </form>
+
+  </mat-card>
+</div>

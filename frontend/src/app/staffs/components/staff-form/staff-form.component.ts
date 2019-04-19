@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { StaffsService } from '../../services/staffs.service';
 import { MatSnackBar } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Staff } from '../../model/staff';
+import { User } from 'src/app/core/models/user';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-staff-form',
@@ -11,15 +11,15 @@ import { Staff } from '../../model/staff';
   styleUrls: ['./staff-form.component.scss']
 })
 export class StaffFormComponent implements OnInit {
-  private staff: Staff;
+  private staff: User;
   staffForm: FormGroup;
   constructor(
     private fb: FormBuilder,
-    private staffService: StaffsService,
+    private authService: AuthService,
     private snackBar: MatSnackBar,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.createForm();
@@ -27,8 +27,8 @@ export class StaffFormComponent implements OnInit {
   }
   onSubmit() {
     if (this.staff) {
-      this.staffService
-        .updateStaff(this.staff._id, this.staffForm.value)
+      this.authService
+        .updateUser(this.staff._id, this.staffForm.value)
         .subscribe(
           data => {
             this.snackBar.open('Staff updated', 'Success', {
@@ -39,7 +39,7 @@ export class StaffFormComponent implements OnInit {
           err => this.errorHandler(err, 'Failed to update staff')
         );
     } else {
-      this.staffService.createStaff(this.staffForm.value).subscribe(
+      this.authService.signup(this.staffForm.value).subscribe(
         data => {
           this.snackBar.open('Staff created!', 'Success', {
             duration: 2000
@@ -54,13 +54,12 @@ export class StaffFormComponent implements OnInit {
   private setStaffToForm() {
     // get the id of the resident
     this.route.params.subscribe(params => {
-      // let id = params['id'];
-      // tslint:disable-next-line: prefer-const
+// tslint:disable-next-line: prefer-const
       let id = params.id;
       if (!id) {
         return;
       }
-      this.staffService.getStaff(id).subscribe(
+      this.authService.getUser(id).subscribe(
         staff => {
           this.staff = staff;
           this.staffForm.patchValue(this.staff);
@@ -71,11 +70,12 @@ export class StaffFormComponent implements OnInit {
   }
   private createForm() {
     this.staffForm = this.fb.group({
-      name: ['', Validators.required],
+      unitNum: ['', Validators.required],
+      accessCode: ['', Validators.required],
+      fullName: ['', Validators.required],
       dob: ['', Validators.required],
-      workingSince: ['', Validators.required],
       email: ['', Validators.required],
-      accessCode: ['', Validators.required]
+      password: ['', Validators.required]
     });
   }
   private errorHandler(error, message) {

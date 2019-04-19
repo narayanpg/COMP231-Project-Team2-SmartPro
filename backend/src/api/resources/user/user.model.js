@@ -9,8 +9,16 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  accessCode: {
+    type: String,
+    required: true,
+  },
   fullName: {
     type: String,
+    required: true,
+  },
+  dob: {
+    type: Date,
     required: true,
   },
   email: {
@@ -22,7 +30,7 @@ const UserSchema = new Schema({
   password: {
     type: String,
     required: true,
-  },  
+  },
   date: {
     type: Date,
     default: Date.now

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { StaffsService } from '../../services/staffs.service';
-import { Staff } from '../../model/staff';
+import { User } from '../../../core/models/user';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { remove } from 'lodash';
+import { JwtService } from 'src/app/core/services/jwt.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-staff-listing',
@@ -12,8 +13,8 @@ import { remove } from 'lodash';
 })
 export class StaffListingComponent implements OnInit {
   constructor(
-    private staffService: StaffsService,
-    // tslint:disable-next-line: align
+    private jwtService: JwtService,
+    private authService: AuthService,
     private router: Router,
     private snackBar: MatSnackBar
   ) {}
@@ -21,27 +22,25 @@ export class StaffListingComponent implements OnInit {
   displayedColumns = [
     'name',
     'dob',
-    'workingSince',
     'email',
     'accessCode',
     'action'
   ];
   // tslint:disable-next-line: no-use-before-declare
-  dataSource: Staff[] = [];
+  dataSource: User[] = [];
 
   saveBtnHandler() {
     this.router.navigate(['dashboard', 'staffs', 'new']);
   }
 
   // tslint:disable-next-line: comment-format
-  //editBtnHandler(id) {
   updateBtnHandler(id) {
     this.router.navigate(['dashboard', 'staffs', id]);
   }
 
   deleteBtnHandler(id) {
     // tslint:disable-next-line: no-debugger
-    this.staffService.deleteStaff(id).subscribe(
+    this.authService.deleteUser(id).subscribe(
       data => {
         const removedItems = remove(this.dataSource, item => {
           return item._id === data._id;
@@ -57,7 +56,7 @@ export class StaffListingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.staffService.getStaffs().subscribe(
+    this.authService.getStaffs().subscribe(
       data => {
         this.dataSource = data;
         console.log(data);
@@ -72,5 +71,28 @@ export class StaffListingComponent implements OnInit {
     this.snackBar.open(message, 'Error', {
       duration: 2000
     });
+  }
+  isLoggedIn() {
+    const token = this.jwtService.getToken();
+    if (token) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  getUserName() {
+    if (this.isLoggedIn()) {
+      const user = this.jwtService.getUserName();
+      return user;
+    }
+  }
+  isAdmin() {
+    if (this.isLoggedIn()) {
+      if (this.getUserName() === 'Narayan Guragain') {
+        return true;
+      } else {
+        return false;
+      }
+    }
   }
 }

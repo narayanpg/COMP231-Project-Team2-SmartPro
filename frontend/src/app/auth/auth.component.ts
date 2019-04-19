@@ -22,7 +22,7 @@ export class AuthComponent implements OnInit {
     private jwtService: JwtService,
     private router: Router,
     private snackBar: MatSnackBar,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.initForm();
@@ -36,16 +36,17 @@ export class AuthComponent implements OnInit {
       this.authService.signup(this.authForm.value)
         .subscribe(data => {
           console.log(data);
-          this.router.navigate(['/dashboard', 'residents']);
+          // this.router.navigate(['/dashboard', 'residents']);
+          this.router.navigate(['/login']);
         }, err => this.errorHandler(err, 'Opps, something went wrong'),
-        () => this.isResultsLoading = false);
+          () => this.isResultsLoading = false);
     } else {
       this.isResultsLoading = true;
       this.authService.login(this.authForm2.value).subscribe(
         data => {
           console.log(data);
           this.jwtService.setToken(data.token);
-          this.router.navigate(['/dashboard', 'residents']);
+          this.router.navigate(['/dashboard', 'account']);
         },
         err => this.errorHandler(err, 'Opps, something went wrong'),
         () => this.isResultsLoading = false);
@@ -56,7 +57,9 @@ export class AuthComponent implements OnInit {
   private initForm() {
     this.authForm = this.fb.group({
       unitNum: ['', Validators.required],
+      accessCode: ['', Validators.required],
       fullName: ['', Validators.required],
+      dob: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required]
     });

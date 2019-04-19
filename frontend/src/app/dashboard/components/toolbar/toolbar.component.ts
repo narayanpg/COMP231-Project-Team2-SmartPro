@@ -19,5 +19,28 @@ export class ToolbarComponent implements OnInit {
     this.jwtService.destroyToken();
     this.router.navigate(['/login']);
   }
+  isLoggedIn() {
+    const token = this.jwtService.getToken();
+    if (token) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  getUserName() {
+    if (this.isLoggedIn()) {
+      const user = this.jwtService.getUserName();
+      return user;
+    }
+  }
+  isAdmin() {
+    if (this.isLoggedIn()) {
+      if (this.jwtService.isAdmin()) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
 
 }

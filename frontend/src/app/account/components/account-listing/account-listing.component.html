@@ -1,0 +1,24 @@
+<mat-card>
+  <p class="account-details-head">
+    <span>Account Details</span>
+  </p>
+
+  <mat-list>
+    <mat-list-item>
+      <pre>Name:        </pre> <span class="bold-text">{{ getUserName()}}</span>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <pre>DoB:         </pre><span class="bold-text">{{ getDob() | date}}</span>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <pre>Email:       </pre><span class="bold-text">{{ getUserEmail()}}</span>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <pre>Access Code: </pre><span class="bold-text">{{ getUserAccessCode()}}</span>
+    </mat-list-item>
+  </mat-list>
+
+</mat-card>

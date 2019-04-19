@@ -1,48 +1,41 @@
 <div layout="column" layout-align="center center">
   <mat-card>
     <h3>Create Resident</h3>
-    {{this.residentForm.value | json}}
+    <!-- {{this.residentForm.value | json}} -->
     <form class="form-container" [formGroup]="residentForm" novalidate (ngSubmit)="onSubmit()">
 
       <mat-form-field color="primary">
-        <input matInput placeholder="Unit" formControlName="unit">
+        <input matInput placeholder="Unit" formControlName="unitNum">
         <mat-error *ngIf="residentForm.invalid && residentForm.touched">Unit number is required</mat-error>
       </mat-form-field>
 
       <mat-form-field color="primary">
-        <input matInput placeholder="Name" formControlName="name">
-        <mat-error *ngIf="residentForm.invalid && residentForm.touched">name is required</mat-error>
+        <input matInput placeholder="Access Code" formControlName="accessCode">
+        <mat-error *ngIf="residentForm.invalid && residentForm.touched">Access code is required</mat-error>
       </mat-form-field>
 
-      <!-- <mat-form-field color="primary">
-        <input matInput [matDatepicker]="dob" placeholder="Choose a date" formControlName="dob">
+      <mat-form-field color="primary">
+        <input matInput placeholder="Name" formControlName="fullName">
+        <mat-error *ngIf="residentForm.invalid && residentForm.touched">Full name is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field color="accent" style="width: 100%">
+        <input matInput [matDatepicker]="dob" placeholder="Choose a birth date" formControlName="dob">
         <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
         <mat-datepicker #dob></mat-datepicker>
-        <mat-error *ngIf="residentForm.invalid && residentForm.touched">Date of birth is required</mat-error>
-      </mat-form-field> -->
-
-      <mat-form-field color="primary">
-        <input matInput [matDatepicker]="livingSince" placeholder="Choose a start date" formControlName="livingSince">
-        <mat-datepicker-toggle matSuffix [for]="livingSince"></mat-datepicker-toggle>
-        <mat-datepicker #livingSince></mat-datepicker>
-        <mat-error *ngIf="residentForm.invalid && residentForm.touched">Start date is required</mat-error>
+        <mat-error *ngIf="residentForm.invalid && residentForm.touched">
+          Birth date is required</mat-error>
       </mat-form-field>
 
       <mat-form-field color="primary">
-        <input matInput placeholder="email" type="email" formControlName="email">
+        <input matInput placeholder="Email" type="email" formControlName="email">
         <mat-error *ngIf="residentForm.invalid && residentForm.touched">Email is required</mat-error>
       </mat-form-field>
 
       <mat-form-field color="primary">
-        <input matInput placeholder="unitSharedWith" type="number" formControlName="unitSharedWith">
-        <mat-error *ngIf="residentForm.invalid && residentForm.touched">Num of other residents in unit is required</mat-error>
+        <input matInput placeholder="Password" formControlName="password" type="password">
+        <mat-error *ngIf="residentForm.invalid && residentForm.touched">Password is required</mat-error>
       </mat-form-field>
-
-      <mat-form-field color="primary">
-        <input matInput placeholder="Accesscode" formControlName="accessCode">
-        <mat-error *ngIf="residentForm.invalid && residentForm.touched">AccessCode is required</mat-error>
-      </mat-form-field>
-
 
       <div>
         <button mat-raised-button [disabled]="!residentForm.valid" type="submit" color="accent">Save</button>
